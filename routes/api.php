@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\TokenController;
 use App\Http\Controllers\AvatarController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,4 +30,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
   Route::post('/messages', [MessageController::class, 'store']);
   Route::get('/messages', [MessageController::class, 'index']);
+  
+  Route::get('/products', [ProductController::class, 'index']);//->name('products.index');
+  
 });
+
+
