@@ -18,8 +18,14 @@ class DatabaseSeeder extends Seeder
             'name' => 'Luke Skywalker',
             'email' => 'luke@jedi.com',
             'email_verified_at' => null,
+            'is_admin' => true            
           ]
         );
         \App\Models\User::factory(20)->create();
+        
+        $this->call([
+            //UserSeeder::class,
+            ProductSeeder::class,
+        ]);
     }
 }
