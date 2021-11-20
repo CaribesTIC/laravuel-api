@@ -8,6 +8,9 @@ use App\Http\Controllers\AvatarController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProductController;
 
+use Illuminate\Http\Request;
+
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -36,6 +39,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
     });
 
   Route::post('/users/auth/avatar', [AvatarController::class, 'store']);
+  
+  Route::post('/users/{userId}', function (Request $request, $userId) {
+    return response()->json($request, 200);
+  });
 
   Route::post('/messages', [MessageController::class, 'store']);
   Route::get('/messages', [MessageController::class, 'index']);
