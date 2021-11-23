@@ -28,6 +28,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
   Route::get('/users/auth', AuthController::class);
   Route::get('/users/{user}', [UserController::class, 'show']);
   Route::get('/users', [UserController::class, 'index']);
+  Route::post('/users/{user}', [UserController::class, 'update']);
   Route::get('/user/helperTables', function () {
       return response()->json([
         "roles" => [
@@ -37,12 +38,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         ]
       ], 200);
     });
-
   Route::post('/users/auth/avatar', [AvatarController::class, 'store']);
-  
-  Route::post('/users/{userId}', function (Request $request, $userId) {
-    return response()->json($request, 200);
-  });
 
   Route::post('/messages', [MessageController::class, 'store']);
   Route::get('/messages', [MessageController::class, 'index']);

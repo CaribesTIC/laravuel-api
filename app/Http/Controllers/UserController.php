@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -51,12 +52,22 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  \App\Models\User $user
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user) : \Illuminate\Http\JsonResponse
     {
-        //
+
+      $data = $request->all();
+
+      if (isset($data["password"]) && $data["password"] )
+        $data["password"] = Hash::make($data["password"]);
+      else
+        unset($data["password"]); 
+
+      $user->update($data);
+
+      return response()->json(["message"=> "Usuario actualizado"], 200);
     }
 
     /**
