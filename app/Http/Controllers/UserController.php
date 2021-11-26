@@ -67,6 +67,7 @@ class UserController extends Controller
 
       $user->update($data);
 
+      // return  response()->json(["message" => "Forbidden"], 403);
       return response()->json(["message"=> "Usuario actualizado"], 200);
     }
 
