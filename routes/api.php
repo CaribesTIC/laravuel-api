@@ -28,6 +28,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
   Route::get('/users/auth', AuthController::class);
   Route::get('/users/{user}', [UserController::class, 'show']);
   Route::get('/users', [UserController::class, 'index']);
+  Route::post('/users', [UserController::class, 'store']);
   Route::post('/users/{user}', [UserController::class, 'update']);
   Route::get('/user/helperTables', function () {
       return response()->json([

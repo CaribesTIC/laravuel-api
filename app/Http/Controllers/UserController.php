@@ -28,10 +28,16 @@ class UserController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+     */ 
+    public function store(Request $request) : \Illuminate\Http\JsonResponse
     {
-        //
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->role_id = $request->role_id;
+        $user->save();
+        return response()->json(["message"=> "Usuario ceado"], 201);
     }
 
     /**
