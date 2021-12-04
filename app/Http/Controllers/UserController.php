@@ -31,6 +31,16 @@ class UserController extends Controller
      */ 
     public function store(Request $request) : \Illuminate\Http\JsonResponse
     {
+
+        $validated = $request->validate([
+            'name' => 'required',
+            'password' => 'required',
+            'email' => 'required',
+            'role_id' => 'required',
+        ]);
+
+        //dd($validate);
+     
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
@@ -38,6 +48,7 @@ class UserController extends Controller
         $user->role_id = $request->role_id;
         $user->save();
         return response()->json(["message"=> "Usuario ceado"], 201);
+        //return  response()->json(["message" => "Forbidden"], 403);
     }
 
     /**
