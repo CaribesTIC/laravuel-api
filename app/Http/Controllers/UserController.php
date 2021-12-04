@@ -47,7 +47,7 @@ class UserController extends Controller
         $user->password = Hash::make($request->password);
         $user->role_id = $request->role_id;
         $user->save();
-        return response()->json(["message"=> "Usuario ceado"], 201);
+        return response()->json(["message"=> "Usuario creado"], 201);
         //return  response()->json(["message" => "Forbidden"], 403);
     }
 
@@ -74,18 +74,16 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user) : \Illuminate\Http\JsonResponse
     {
-
-      $data = $request->all();
-
-      if (isset($data["password"]) && $data["password"] )
-        $data["password"] = Hash::make($data["password"]);
-      else
-        unset($data["password"]); 
-
-      $user->update($data);
-
-      // return  response()->json(["message" => "Forbidden"], 403);
-      return response()->json(["message"=> "Usuario actualizado"], 200);
+      if (Auth::user()->isAdmin()) {
+        $data = $request->all();
+        if (isset($data["password"]) && $data["password"] )
+          $data["password"] = Hash::make($data["password"]);
+        else
+          unset($data["password"]); 
+        $user->update($data);
+        return response()->json(["message"=> "Usuario actualizado"], 200);
+      }
+      return  response()->json(["message" => "Forbidden"], 403);
     }
 
     /**
