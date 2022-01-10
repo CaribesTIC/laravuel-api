@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\XserController;
 use App\Http\Controllers\TokenController;
 use App\Http\Controllers\AvatarController;
 use App\Http\Controllers\MessageController;
@@ -28,6 +29,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
   Route::get('/users/auth', AuthController::class);
   Route::get('/users/{user}', [UserController::class, 'show']);
   Route::get('/users', [UserController::class, 'index']);
+  Route::get('/xsers', [XserController::class, 'index']);
   Route::post('/users', [UserController::class, 'store']);
   Route::post('/users/{user}', [UserController::class, 'update']);
   Route::get('/user/helperTables', function () {

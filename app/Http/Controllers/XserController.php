@@ -8,20 +8,22 @@ use App\Http\Resources\UserResource;
 use App\Http\Resources\UserCollection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Services\User\IndexUserService;
 
-class UserController extends Controller
+class XserController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         if (Auth::user()->isAdmin()) {
+            return IndexUserService::execute($request);
            // return response(User::paginate(5));
-           // return response()->json(User::paginate(5));
-           return UserResource::collection(User::paginate(5));
+            //return response()->json(User::paginate(5));
+           
            //return new UserCollection(User::paginate(5));
         }
         return  response()->json(["message" => "Forbidden"], 403);
