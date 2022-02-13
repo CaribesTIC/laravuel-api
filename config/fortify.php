@@ -61,7 +61,7 @@ return [
     |
     */
 
-    'home' => env('SPA_URL') . '/dashboard',
+    'home' => RouteServiceProvider::HOME,
 
     /*
     |--------------------------------------------------------------------------
@@ -103,7 +103,8 @@ return [
     */
 
     'limiters' => [
-        'login' => null,
+        'login' => 'login',
+        'two-factor' => 'two-factor',
     ],
 
     /*
@@ -117,7 +118,7 @@ return [
     |
     */
 
-    'views' => false,
+    'views' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -133,7 +134,7 @@ return [
     'features' => [
         Features::registration(),
         Features::resetPasswords(),
-        Features::emailVerification(),
+        // Features::emailVerification(),
         Features::updateProfileInformation(),
         Features::updatePasswords(),
         Features::twoFactorAuthentication([
