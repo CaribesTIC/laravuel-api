@@ -15,7 +15,7 @@ class UsersModuleTest extends TestCase
     use RefreshDatabase, UserTestable;
 
     public function test_it_shows_the_users_list()
-    {   $this->withoutExceptionHandling();
+    {
         $this->actingAs(UserTestable::userAdmin());
 
         User::factory()->create([ 'name' => 'John Doe' ]);
@@ -79,10 +79,10 @@ class UsersModuleTest extends TestCase
         $this->actingAs(UserTestable::userAdmin());
 
         $this->post("/api/users/",[
-                "name" => null,
-                "email" => "user@email.ext",
-                "password" => "secret",
-                "role_id" => 2 //user
+            "name" => null,
+            "email" => "user@email.ext",
+            "password" => "secret",
+            "role_id" => 2 //user
         ])->assertStatus(302);
 
         $errors = session('errors');
@@ -93,63 +93,63 @@ class UsersModuleTest extends TestCase
         $this->assertDatabaseMissing("users", ["email" => "user@email.ext"]);
     }
     
-/*    public function test_the_email_is_required()
+    public function test_the_email_is_required()
     {   
         $this->actingAs(UserTestable::userAdmin());
 
-        $this->from('/users/create')
-             ->post('/users/',[
-                'name' => 'John Doe',
-                'email' => '',
-                'password' => 'secret',
-                'role' => 'user'
-            ])
-            ->assertRedirect(route("users.create"))
-            ->assertStatus(302);            
-            
-         $errors = session('errors');
-            
-         $this->assertEquals($errors->get('email')[0],"El campo Correo Electrónico es obligatorio."); 
+        $this->post("/api/users/",[
+            "name" => "John Doe",
+            "email" => "",
+            "password" => "secret",
+            "role_id" => 2 //user
+        ])->assertStatus(302);            
 
-         $this->assertEquals(0, User::where('role','user')->count());    
+        $errors = session('errors');
+            
+        //$this->assertEquals($errors->get('email')[0],"El campo Correo Electrónico es obligatorio.");
+        $this->assertEquals($errors->get("email")[0],"The email field is required.");
+
+        $this->assertEquals(0, User::where("role_id", 2)->count());    
     }
     
-    public function test_the_email_must_be_unique()
-    {
+    /*public function test_the_email_must_be_unique()
+    {$this->withoutExceptionHandling();
         $this->actingAs(UserTestable::userAdmin());
         
         $user = User::factory()->create([            
-            'email' => 'user@email.ext',
+            "email" => "user@email.ext",
         ]);
 
-        $this->from('/users/create')
-            ->post('/users/',[
-                'name' => 'John Doe',
-                'email' => 'user@email.ext',
-                'password' => 'secret'        
-            ])            
-            ->assertRedirect(route("users.create"));
-            $errors = session('errors');
-            $this->assertEquals($errors->get('email')[0],"El valor del campo Correo Electrónico ya está en uso.");
+        $this->post('/api/users/',[
+            "name" => "John Doe",
+            "email" => "user@email.ext",
+            "password" => "secret",
+            "role_id" => 2 //user        
+        ]);//->assertStatus(302);
 
-            $this->assertEquals(2, User::count());        
-    }
+        $errors = session('errors');
+
+        dd($errors);
+        //$this->assertEquals($errors->get('email')[0],"El valor del campo Correo Electrónico ya está en uso.");
+
+        //$this->assertEquals(2, User::count());        
+    }*/
     
     public function test_the_password_is_required()
     {
         $this->actingAs(UserTestable::userAdmin());
         
-        $this->from('/users/create')
-             ->post('/users/',[
-                'name' => 'John Doe',
-                'email' => 'user@email.ext',
-                'password' => ''         
-            ])
-            ->assertRedirect(route("users.create"));
-            
-            $errors = session('errors');
-            $this->assertEquals($errors->get('password')[0],"El campo Contraseña es obligatorio.");
-            $this->assertEquals(1, User::count());        
+        $this->post("/api/users/",[
+            "name" => "John Doe",
+            "email" => "user@email.ext",
+            "password" => "",
+            "role_id" => 2 //user         
+        ])->assertStatus(302);
+
+        $errors = session('errors');
+        //$this->assertEquals($errors->get('password')[0],"El campo Contraseña es obligatorio.");
+        $this->assertEquals($errors->get('password')[0],"The password field is required.");
+        $this->assertEquals(1, User::count());        
     }
     
     public function test_it_load_the_edit_page()
@@ -157,13 +157,13 @@ class UsersModuleTest extends TestCase
         $this->actingAs(UserTestable::userAdmin());
  
         $userId = User::factory()->create([            
-            'name' => 'John Doe',
-            'email' => 'user@email.ext'
+            "name" => "John Doe",
+            "email" => "user@email.ext"
         ])->id;
 
-        $response = $this->get("/users/{$userId}/edit")
-            ->assertSee(json_encode ('John Doe'))
-            ->assertSee(json_encode ('user@email.ext'))
+        $response = $this->get("/api/users/{$userId}")
+            ->assertSee("John Doe")
+            ->assertSee("user@email.ext")
             ->assertStatus(200);          
     }
     
@@ -173,42 +173,53 @@ class UsersModuleTest extends TestCase
 
         $user = User::factory()->create();
 
-        $this->from("/users/{$user->id}/edit")
-             ->put("/users/{$user->id}",[
-                 'name' => 'John Doe',
-                 'email' => 'user@email.ext',
-                 'password' => 'secret',
-                 'role_id' => 2 //user
-            ])->assertRedirect(route("users"));
-   
+        //$this->put("/api/users/{$user->id}",[
+        $this->post("/api/users/{$user->id}",[
+            "name" => "John Doe",
+            "email" => "user@email.ext",
+            "password" => "secret",
+            "role_id" => 2 //user
+        ]);
+        $user->refresh();
+
+        $this->assertEquals([
+            "name" => $user->name,
+            "email" => $user->email,
+            "role_id" => $user->role_id
+        ], [
+            "name" => "John Doe" ,
+            "email" => "user@email.ext",
+            "role_id" => 2 //user
+        ]);
+
         $this->assertCredentials([
-            'name' => 'John Doe',
-            'email' => 'user@email.ext',
-            'password' => 'secret',
-            'role_id' => 2 //user     
-        ], 'web');
+            "name" => "John Doe",
+            "email" => "user@email.ext",
+            "password" => "secret",
+            "role_id" => 2 //user     
+        ], "web");
    }
    
-    public function test_the_name_is_required_when_updating_the_user()
+    /*public function test_the_name_is_required_when_updating_the_user()
     {
         $this->actingAs(UserTestable::userAdmin());
 
         $user = User::factory()->create();
 
-	      $this->from("users/{$user->id}/edit")
-	           ->put("/users/{$user->id}",[
-                 'name' => '',
-                 'email' => 'user@email.ext',
-                 'password' => 'secret'        
-          ])->assertRedirect(route("users.edit", $user->id));
-          
-          $errors = session('errors');
-          $this->assertEquals($errors->get('name')[0],"El campo Nombre es obligatorio.");
+	    $this->post("/api/users/{$user->id}",[
+            "name" => "",
+            "email" => "user@email.ext",
+            "password" => "secret",
+            "role_id" => 2 //user
+        ]);
+  
+        $errors = session("errors");
+        $this->assertEquals($errors->get("name")[0],"The name field is required.");
 
-          $this->assertDatabaseMissing('users', ['email' => 'user@email.ext']);        
-    }
+        $this->assertDatabaseMissing("users", ["email" => "user@email.ext"]);        
+    }*/
     
-    public function test_the_email_must_be_valid_when_updating_the_user()
+/*    public function test_the_email_must_be_valid_when_updating_the_user()
     {
         $this->actingAs(UserTestable::userAdmin());
 
