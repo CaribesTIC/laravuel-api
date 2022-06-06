@@ -35,6 +35,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
   Route::get('/users', [XserController::class, 'index']);
   Route::post('/users', [UserController::class, 'store']);
   Route::post('/users/{user}', [UserController::class, 'update']);
+  Route::delete('/users/{id}', [UserController::class,'destroy']);
   Route::get('/user/helperTables', function () {
       return response()->json([
         "roles" => [

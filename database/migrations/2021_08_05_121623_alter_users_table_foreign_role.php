@@ -18,7 +18,8 @@ return new class extends Migration
             //$table->foreignId('role_id')->default(2)->references('id')->on('roles');
             $table->integer('role_id')->default(2);
             $table->boolean('is_admin')->default(false);
-            $table->string('avatar')->nullable();            
+            $table->string('avatar')->nullable();
+            $table->softDeletes();           
         });
     }
 
@@ -32,7 +33,8 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
                $table->dropColumn('role_id');
                $table->dropColumn('is_admin');
-               $table->dropColumn('avatar');               
+               $table->dropColumn('avatar');
+               $table->dropSoftDeletes();              
         });
     }
 };

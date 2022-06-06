@@ -96,8 +96,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function destroy(Request $request)
+    {      
+        if (Auth::user()->isAdmin()) {
+            User::destroy($request->id);
+            return response()->json(204);            
+        }
+        return  response()->json(["message" => "Forbidden"], 403);
     }
 }
