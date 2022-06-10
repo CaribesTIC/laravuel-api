@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use Illuminate\Http\Request;
-use App\Http\Resources\UserResource;
-use App\Http\Resources\UserCollection;
+use Illuminate\Http\{Request, JsonResponse};
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+use App\Models\User;
+use App\Http\Resources\UserResource;
+use App\Http\Services\User\{
+    StoreUserService,
+    IndexUserService,
+    UpdateUserService
+};
 
 class UserController extends Controller
 {
@@ -16,13 +19,10 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request): JsonResponse
     {
         if (Auth::user()->isAdmin()) {
-           // return response(User::paginate(5));
-           // return response()->json(User::paginate(5));
-           return UserResource::collection(User::paginate(5));
-           //return new UserCollection(User::paginate(5));
+            return IndexUserService::execute($request);            
         }
         return  response()->json(["message" => "Forbidden"], 403);
     }
@@ -33,35 +33,21 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */ 
-    public function store(Request $request) : \Illuminate\Http\JsonResponse
+    public function store(Request $request): JsonResponse
     {
-
-        $validated = $request->validate([
-            'name' => 'required',
-            'password' => 'required',
-            'email' => 'required',
-            'role_id' => 'required',
-        ]);
-
-        //dd($validate);
-     
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->role_id = $request->role_id;
-        $user->save();
-        return response()->json(["message"=> "Usuario creado"], 201);
-        //return  response()->json(["message" => "Forbidden"], 403);
+        if (Auth::user()->isAdmin()) {
+            return StoreUserService::execute($request);
+        }
+        return  response()->json(["message" => "Forbidden"], 403);
     }
 
     /**
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return App\Http\Resources\UserResource | \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(User $user): UserResource | JsonResponse
     {
         if (Auth::user()->isAdmin()) {
           return new UserResource($user);
@@ -76,18 +62,12 @@ class UserController extends Controller
      * @param  \App\Models\User $user
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, User $user) : \Illuminate\Http\JsonResponse
+    public function update(Request $request, User $user): JsonResponse
     {
-      if (Auth::user()->isAdmin()) {
-        $data = $request->all();
-        if (isset($data["password"]) && $data["password"] )
-          $data["password"] = Hash::make($data["password"]);
-        else
-          unset($data["password"]); 
-        $user->update($data);
-        return response()->json(["message"=> "Usuario actualizado"], 200);
-      }
-      return  response()->json(["message" => "Forbidden"], 403);
+        if (Auth::user()->isAdmin()) {
+            return UpdateUserService::execute($request, $user);
+        }
+        return  response()->json(["message" => "Forbidden"], 403);
     }
 
     /**
@@ -96,7 +76,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy(Request $request): JsonResponse
     {      
         if (Auth::user()->isAdmin()) {
             User::destroy($request->id);

@@ -2,6 +2,8 @@
 
 namespace App\Http\Services\User;
 
+//use App\Http\Resources\UserCollection;
+//use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use App\Models\User;
 
@@ -14,10 +16,7 @@ class IndexUserService
      * @return \Inertia\Response
      */
     static public function execute(Request $request) 
-    {
-    
-    
-             
+    {             
         // Initialize query 
         $query = User::query();
 
@@ -51,7 +50,10 @@ class IndexUserService
             "direction" => $request->query("direction"),
             "search" => $request->query("search")
         ]);
-
+        // return response(User::paginate(5));             
+        // return response()->json(User::paginate(5)); 
+        // return UserResource::collection(User::paginate(5));
+        // return new UserCollection(User::paginate(5));
     }
 
 }
