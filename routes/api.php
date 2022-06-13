@@ -71,7 +71,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
                             "sort" => 1,
                             "icon" =>  "users.svg",
                             "children_menus" => []
-                        ], [
+                        ]/*, [
                             "id" => 6,
                             "title" => "Clientes",
                             "menu_id" => 4,
@@ -87,7 +87,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
                             "sort" => 3,
                             "icon" =>  "posts.svg",
                             "children_menus" => []
-                        ]
+                        ]*/
                     ]
                 ], [
                     "id" => 7,
@@ -118,7 +118,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
                             "id" => 10,
                             "title" => "Forms",
                             "menu_id" => 7,
-                            "path" => "Forms",
+                            "path" => "forms",
                             "sort" => 3,
                             "icon" =>  "dashboard.svg",
                             "children_menus" => []
@@ -148,7 +148,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
                             "children_menus" => []
                         ]
                     ]
-                ], [
+                ]/*, [
                     "id" => 3,
                     "title" => "Development",
                     "menu_id" => 0,
@@ -175,7 +175,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
                             "children_menus" => []
                         ]
                     ]
-                ]
+                ]*/
             ]);   
         });    
         Route::get('/auth', AuthController::class);
