@@ -8,6 +8,8 @@ use App\Http\Controllers\TokenController;
 use App\Http\Controllers\AvatarController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\MenuController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -38,7 +40,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::delete('/{id}', [UserController::class,'destroy']);
         Route::post('/auth/avatar', [AvatarController::class, 'store']);
     });
-
+    
     Route::get('/roles/helperTables', function () {
         return response()->json([
             "roles" => [
@@ -47,6 +49,17 @@ Route::middleware(['auth:sanctum'])->group(function () {
                 ["id"=> 3, "name" => "Other"]
             ]
         ], 200);
+    });
+    
+    Route::prefix('menus')->group(function () {
+        Route::get('/', [MenuController::class, 'index']);
+        //Route::get('/', function () {
+        //    return response()->json(["message" => "Forbidden"], 200);
+        //});
+        Route::get('/children/{menuId}', [MenuController::class, 'children']);
+        Route::post('/store', [MenuController::class, 'store']);  
+        Route::put('/{menu}', [MenuController::class, 'update']);
+        Route::delete('/{id}', [MenuController::class,'destroy']);
     });
 
     Route::post('/messages', [MessageController::class, 'store']);

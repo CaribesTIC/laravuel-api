@@ -28,7 +28,7 @@ class MenuController extends Controller
      *
      * @return \Inertia\Response
      */
-    public function index(): \Inertia\Response
+    public function index(): \Illuminate\Http\JsonResponse
     {
         return MenuService::execute();
     }   

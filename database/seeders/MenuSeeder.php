@@ -127,21 +127,21 @@ class MenuSeeder extends Seeder
             "sort" => 6
         ]);
 
-        /*Menu::create([ // id 13
+        Menu::create([ // id 13
             "title" => "Development",
             "menu_id" => null,
             "path" => "#",
             "icon" => "apple.svg",
             "sort" => 6
-        ]);*/
+        ]);
 
-        /*Menu::create([
+        Menu::create([
             "title" => "Menus",
             "menu_id" => 13,
             "path" => "menus",
             "icon" => "menus.svg",
             "sort" => 1
-        ]);*/
+        ]);
 
         /*Menu::create([
             "title" => "Roles",

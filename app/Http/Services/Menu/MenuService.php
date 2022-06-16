@@ -19,18 +19,16 @@ class MenuService
    *
    * @return \Inertia\Response
    */
-  static public function execute(): \Inertia\Response
+  static public function execute(): \Illuminate\Http\JsonResponse
   {
       $menus = self::get(
           ListMenuRepository::list(
               RecursiveMenuRepository::recursive()
           )
       );
-      
-      return \Inertia\Inertia::render(
-        'Menus/Index',
-        compact('menus')
-      );
+
+      return response()->json($menus, 200);      
+
   }
   
   static public function get($items, $perPage = 5, $page = null, $options = [])
