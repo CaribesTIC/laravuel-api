@@ -1,22 +1,19 @@
 <?php
 namespace App\Http\Services\Menu;
 
-use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\Menu\DestroyMenuRequest;
 use App\Models\Menu;
 
 class DestroyMenuService
 {
  
-  static public function execute(DestroyMenuRequest $request): \Illuminate\Http\RedirectResponse
+  static public function execute(DestroyMenuRequest $request): \Illuminate\Http\JsonResponse
   { 
 
-      $msg  = 'Invalid argument.';
       $menu = Menu::findOrFail($request->id);
-      $menu->delete();
-      $msg  = 'Menu remove.';
+      $menu->delete();      
             
-      return Redirect::route('menus')->with('success', $msg);
+      return response()->json(204);
 
   }
     

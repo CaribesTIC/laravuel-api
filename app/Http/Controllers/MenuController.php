@@ -52,7 +52,7 @@ class MenuController extends Controller
      * @param  \App\Http\Requests\Menu\StoreMenuRequest $request     
      * @return \Illuminate\Http\RedirectResponse     
      */
-    public function store(StoreMenuRequest $request): RedirectResponse
+    public function store(StoreMenuRequest $request): JsonResponse
     {
         return StoreMenuService::execute($request);
     }
@@ -64,7 +64,7 @@ class MenuController extends Controller
      * @param  \App\Models\Menu  $menu
      * @return \Illuminate\Http\RedirectResponse
      */ 
-    public function update(UpdateMenuRequest $request, Menu $menu): RedirectResponse
+    public function update(UpdateMenuRequest $request, Menu $menu): JsonResponse
     {
         return UpdateMenuService::execute($request, $menu);
     }
@@ -75,7 +75,7 @@ class MenuController extends Controller
      * @param  \App\Http\Requests\Menu\DestroyMenuRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(DestroyMenuRequest $request): RedirectResponse
+    public function destroy(DestroyMenuRequest $request): JsonResponse
     {
         return DestroyMenuService::execute($request);
     }

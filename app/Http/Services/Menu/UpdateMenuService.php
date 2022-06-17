@@ -1,7 +1,6 @@
 <?php
 namespace App\Http\Services\Menu;
 
-use Illuminate\Support\Facades\Redirect;
 use App\Http\Validator\Menu\UpdateMenuValidator;
 use App\Http\Requests\Menu\UpdateMenuRequest;
 use App\Models\Menu;
@@ -9,7 +8,7 @@ use App\Models\Menu;
 class UpdateMenuService
 {
  
-  static public function execute(UpdateMenuRequest $request, Menu $menu): \Illuminate\Http\RedirectResponse
+  static public function execute(UpdateMenuRequest $request, Menu $menu): \Illuminate\Http\JsonResponse
   { 
 
       $msg  = 'Invalid data.';
@@ -21,8 +20,7 @@ class UpdateMenuService
           //$code = 200;          
       }  
 
-      //return response()->json( compact( 'msg' ), $code );
-      return Redirect::route('menus')->with('success', $msg);
+      return response()->json(["message"=> $msg], 200);
 
   }
     

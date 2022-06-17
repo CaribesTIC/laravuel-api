@@ -9,7 +9,7 @@ use App\Models\Menu;
 class StoreMenuService
 {
  
-  static public function execute(StoreMenuRequest $request): \Illuminate\Http\RedirectResponse
+  static public function execute(StoreMenuRequest $request): \Illuminate\Http\JsonResponse
   { 
 
       $msg  = 'Invalid data.';      
@@ -27,8 +27,8 @@ class StoreMenuService
           $msg  = 'Menu stored.';
          
       }
-      
-      return Redirect::route('menus')->with('success', $msg);
+
+      return response()->json(["message"=> $msg], 201);
 
   }
     
