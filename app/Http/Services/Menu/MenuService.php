@@ -31,7 +31,7 @@ class MenuService
 
   }
   
-  static public function get($items, $perPage = 5, $page = null, $options = [])
+  static public function get($items, $perPage = 50, $page = null, $options = [])
   {
       $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
       $items = $items instanceof Collection ? $items : Collection::make($items);

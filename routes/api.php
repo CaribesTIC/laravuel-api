@@ -53,9 +53,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     
     Route::prefix('menus')->group(function () {
         Route::get('/', [MenuController::class, 'index']);
-        //Route::get('/', function () {
-        //    return response()->json(["message" => "Forbidden"], 200);
-        //});
         Route::get('/children/{menuId}', [MenuController::class, 'children']);
         Route::post('/store', [MenuController::class, 'store']);  
         Route::put('/{menu}', [MenuController::class, 'update']);

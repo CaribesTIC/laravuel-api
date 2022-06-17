@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use App\Http\Requests\Menu\{
     ChildrenMenuRequest,
     StoreMenuRequest,
@@ -26,11 +28,11 @@ class MenuController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Inertia\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function index(): \Illuminate\Http\JsonResponse
-    {
-        return MenuService::execute();
+    public function index(Request $request): JsonResponse
+    {//dd($request->query());
+        return MenuService::execute($request);
     }   
     
     /**
