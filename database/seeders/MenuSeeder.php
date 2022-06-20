@@ -135,7 +135,7 @@ class MenuSeeder extends Seeder
             "sort" => 6
         ]);
 
-        Menu::create([
+        Menu::create([ // id 14
             "title" => "Menus",
             "menu_id" => 13,
             "path" => "menus",
@@ -143,13 +143,13 @@ class MenuSeeder extends Seeder
             "sort" => 1
         ]);
 
-        /*Menu::create([
+        Menu::create([ // id 15
             "title" => "Roles",
             "menu_id" => 13,
             "path" => "roles",
             "icon" => "users.svg",
             "sort" => 1
-        ]);*/
+        ]);
 
     }
 }

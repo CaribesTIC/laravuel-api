@@ -62,4 +62,12 @@ class User extends Authenticatable
     {
       return $this->hasMany(Message::class);
     }
+    
+    /**
+     * Get the role that owns the user.
+     */
+    public function role()
+    {
+        return $this->belongsTo(\App\Models\Role::class);
+    }
 }

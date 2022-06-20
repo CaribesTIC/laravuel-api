@@ -4,7 +4,9 @@ namespace App\Http\Services\User;
 
 //use App\Http\Resources\UserCollection;
 //use App\Http\Resources\UserResource;
+
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use App\Models\User;
 
 class IndexUserService
@@ -15,7 +17,7 @@ class IndexUserService
      *
      * @return \Inertia\Response
      */
-    static public function execute(Request $request) 
+    static public function execute(Request $request): JsonResponse
     {             
         // Initialize query 
         $query = User::query();

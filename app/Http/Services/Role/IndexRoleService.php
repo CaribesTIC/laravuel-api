@@ -3,8 +3,7 @@
 namespace App\Http\Services\Role;
 
 use Illuminate\Http\Request;
-use App\GeneralSettings;
-use Inertia\Inertia;
+use Illuminate\Http\JsonResponse;
 use \App\Models\Role;
 
 class IndexRoleService
@@ -15,7 +14,7 @@ class IndexRoleService
    *
    * @return \Inertia\Response
    */
-  static public function execute(Request $request, GeneralSettings $settings): \Inertia\Response
+  static public function execute(Request $request): JsonResponse
   {
       /* Initialize query */
         $query = Role::query();
@@ -36,16 +35,17 @@ class IndexRoleService
         }
 
         /* get paginated results */
-        $rolls = $query
-            ->paginate($settings->default_pagination)
+        $roles = $query
+            ->paginate(5)
             ->appends(request()->query());
-
-        return Inertia::render("Roles/Index", [
-            "rows" => $rolls,
+            
+        return response()->json([
+            "rows" => $roles,
             "sort" => $request->query("sort"),
             "direction" => $request->query("direction"),
-            "search" => $request->query("search"),
+            "search" => $request->query("search")
         ]);
+
   }  
 
 }

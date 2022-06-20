@@ -9,7 +9,7 @@ use App\Http\Controllers\AvatarController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\MenuController;
-
+use App\Http\Controllers\RoleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,17 +40,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::delete('/{id}', [UserController::class,'destroy']);
         Route::post('/auth/avatar', [AvatarController::class, 'store']);
     });
-    
-    Route::get('/roles/helperTables', function () {
-        return response()->json([
-            "roles" => [
-                ["id"=> 1, "name" => "Admin"],
-                ["id"=> 2, "name" => "User"],
-                ["id"=> 3, "name" => "Other"]
-            ]
-        ], 200);
-    });
-    
+       
     Route::prefix('menus')->group(function () {
         Route::get('/', [MenuController::class, 'index']);
         Route::get('/children/{menuId}', [MenuController::class, 'children']);
@@ -64,20 +54,15 @@ Route::middleware(['auth:sanctum'])->group(function () {
   
     Route::get('/products', [ProductController::class, 'index']);//->name('products.index');
    
-    /*Route::prefix('roles')->group(function () {
-        Route::get('/', function () {
-            return response()->json([
-                ["id"=> 1, "name" => "Admin"],
-                ["id"=> 2, "name" => "User"],
-                ["id"=> 3, "name" => "Other"]
-            ], 200);
-        });
-        Route::get('/', [RoleController::class, 'index'])->name('roles');
-        Route::get('/create', [RoleController::class, 'create'])->name('roles.create');
-        Route::get('/{role}/show', [RoleController::class, 'show'])->name('roles.show');
-        Route::get('/{role}/edit', [RoleController::class, 'edit'])->name('roles.edit');  
-        Route::post('/store', [RoleController::class, 'store'])->name('roles.store');  
-        Route::put('/{role}', [RoleController::class, 'update'])->name('roles.update');
-        Route::delete('/{id}', [RoleController::class,'destroy'])->name('roles.destroy');
-    });*/  
+    Route::prefix('roles')->group(function () {
+        Route::get('/helperTables', fn() => response()->json([
+            "roles" => \App\Models\Role::get()
+        ], 200));
+        Route::get('/{role}', [RoleController::class, 'show']);
+        Route::get('/', [RoleController::class, 'index']);       
+        Route::post('/', [RoleController::class, 'store']);  
+        Route::put('/{role}', [RoleController::class, 'update']);
+        Route::delete('/{id}', [RoleController::class,'destroy']);        
+    });   
+    
 });

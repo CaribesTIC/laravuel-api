@@ -15,8 +15,8 @@ return new class extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            //$table->foreignId('role_id')->default(2)->references('id')->on('roles');
-            $table->integer('role_id')->default(2);
+            //$table->integer('role_id')->default(2);
+            $table->foreignId('role_id')->default(2)->references('id')->on('roles');            
             $table->boolean('is_admin')->default(false);
             $table->string('avatar')->nullable();
             $table->softDeletes();           
