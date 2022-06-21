@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Role;
 use App\Http\Services\Role\{
     IndexRoleService,
-    //ShowRoleService,
+    ShowRoleService,
     //CreateRoleService,
     StoreRoleService,
     //EditRoleService,

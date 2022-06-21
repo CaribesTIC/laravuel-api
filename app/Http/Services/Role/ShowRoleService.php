@@ -6,21 +6,18 @@ use App\Repositories\Menu\{
     ListMenuRepository,
     RecursiveMenuRepository
 };
-use Inertia\{
-    Inertia,
-    Response
-};
+use Illuminate\Http\JsonResponse;
 
 class ShowRoleService
 {
 
-  static public function execute(Role $role): Response
+  static public function execute(Role $role): JsonResponse
   {
        $menus = ListMenuRepository::list(
               RecursiveMenuRepository::recursive()
        );
 
-       return Inertia::render("Roles/Show", [
+       return response()->json([
 	       "role"  => (object)$role->toArray(), 
            "menus" => $menus,
        ]);
