@@ -13,10 +13,10 @@ class AuthMenuController extends Controller
         if (!Auth::user())  //auth()->check()
             return  response()->json(["message" => "Forbidden"], 403);          
 
-        //$user = $request->user();
-        //$role = \App\Models\Role::select('menu_ids')->find($user->role_id);            
-        //$menus = RecursiveMenuRepository::recursive($role->menu_ids);
-        $menus = RecursiveMenuRepository::recursive();               
+        $user = Auth::user();
+        $role = \App\Models\Role::select('menu_ids')->find($user->role_id);           
+        $menus = RecursiveMenuRepository::recursive($role->menu_ids);
+        //$menus = RecursiveMenuRepository::recursive();               
         return response()->json($menus);       
        
     }
