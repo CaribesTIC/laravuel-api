@@ -2,8 +2,10 @@
 
 namespace App\Http\Services\Role;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse;
+use Illuminate\Http\{
+    Request,
+    JsonResponse
+};
 use \App\Models\Role;
 
 class IndexRoleService

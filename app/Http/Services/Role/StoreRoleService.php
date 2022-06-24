@@ -1,17 +1,19 @@
 <?php
 namespace App\Http\Services\Role;
 
-use Illuminate\Support\Facades\Redirect;
 //use App\Http\Validator\Role\StoreRoleValidator;
 //use App\Http\Requests\Role\StoreRoleRequest;
-use Illuminate\Http\Request;
+use Illuminate\Http\{
+    Request,
+    JsonResponse
+};
 use App\Models\Role;
 
 class StoreRoleService
 {
 
-  //static public function execute(StoreRoleRequest $request): \Illuminate\Http\RedirectResponse
-  static public function execute(Request $request): \Illuminate\Http\RedirectResponse
+  //static public function execute(StoreRoleRequest $request): \Illuminate\Http\JsonResponse
+  static public function execute(Request $request): JsonResponse
   { 
 
       $msg  = 'Invalid data.';
@@ -28,7 +30,7 @@ class StoreRoleService
 
       //}
 
-      return Redirect::route('roles')->with('success', $msg);
+      return response()->json(["message"=> $msg], 201);
 
   }
 

@@ -6,9 +6,7 @@ use App\Models\Role;
 use App\Http\Services\Role\{
     IndexRoleService,
     ShowRoleService,
-    //CreateRoleService,
-    StoreRoleService,
-    //EditRoleService,
+    StoreRoleService,    
     UpdateRoleService,
     DestroyRoleService    
 };
@@ -33,11 +31,6 @@ class RoleController extends Controller
     public function store(Request $request): JsonResponse
     {
         return StoreRoleService::execute($request);
-    }
-
-    public function edit(Role $role): JsonResponse
-    {
-        return EditRoleService::execute($role); 
     }
 
     public function update(Request $request, Role $role): JsonResponse
