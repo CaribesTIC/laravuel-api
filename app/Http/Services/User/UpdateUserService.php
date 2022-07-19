@@ -2,20 +2,25 @@
 namespace App\Http\Services\User;
 
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use App\Http\Requests\User\UpdateUserRequest;
 use App\Models\User;
+
 
 class UpdateUserService
 {
-    static public function execute(Request $request, User $user) : \Illuminate\Http\JsonResponse
+    static public function execute(UpdateUserRequest $request, User $user) : JsonResponse
     {
         $data = $request->all();
-        if (isset($data["password"]) && $data["password"] )
+
+        if (isset($data["password"]) && $data["password"]) {
             $data["password"] = Hash::make($data["password"]);
-        else
-            unset($data["password"]); 
+        } else {
+            unset($data["password"]);
+        }
+            
         $user->update($data);
-        return response()->json(["message"=> "Usuario actualizado"], 200);
-      
+
+        return response()->json(["message"=> "Usuario actualizado"], 200);      
     }
 }

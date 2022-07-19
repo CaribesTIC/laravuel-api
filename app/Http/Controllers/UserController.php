@@ -6,18 +6,25 @@ use Illuminate\Http\{Request, JsonResponse};
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Http\Resources\UserResource;
+use App\Http\Requests\User\{
+    StoreUserRequest,
+    UpdateUserRequest
+};
 use App\Http\Services\User\{
     StoreUserService,
     IndexUserService,
     UpdateUserService
 };
 
+
+
 class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index(Request $request): JsonResponse
     {
@@ -30,10 +37,10 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  \App\Http\Requests\User\StoreUserRequest $request
+     * @return \Illuminate\Http\JsonResponse
      */ 
-    public function store(Request $request): JsonResponse
+    public function store(StoreUserRequest $request): JsonResponse
     {
         if (Auth::user()->isAdmin()) {
             return StoreUserService::execute($request);
@@ -58,11 +65,11 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\User\UpdateUserRequest $request
      * @param  \App\Models\User $user
      * @return \Illuminate\Http\JsonResponse
-     */
-    public function update(Request $request, User $user): JsonResponse
+     */     
+    public function update(UpdateUserRequest $request, User $user): JsonResponse
     {
         if (Auth::user()->isAdmin()) {
             return UpdateUserService::execute($request, $user);
@@ -73,8 +80,8 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Request $request): JsonResponse
     {      
