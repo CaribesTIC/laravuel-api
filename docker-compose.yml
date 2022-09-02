@@ -1,0 +1,49 @@
+version: "3.9"
+services:  
+  php_laravuel:
+    build:
+      context: .
+      dockerfile: Dockerfile    
+    container_name: laravuel_php
+    restart: unless-stopped
+    tty: true
+    working_dir: /var/www/html/
+    volumes:
+      - ./:/var/www/html/
+      - ./php/laravel.ini:/usr/local/etc/php/conf.d/laravel.ini
+    networks:
+      - laravuel-network
+ 
+  nginx_laravuel:
+    depends_on:
+      - php_laravuel
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    container_name: laravuel_nginx
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "80:80"
+    networks:
+      - laravuel-network
+
+  pgsql_laravuel:
+    container_name: laravuel_pgsql
+    image: postgres:13
+    ports:
+      - "${DB_PORT}:5432"
+    environment:
+      POSTGRES_DB: ${DB_DATABASE}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - "./postgresql:/var/lib/postgresql/data"
+    networks:
+      - laravuel-network
+    healthcheck:
+      test: ["CMD", "pg_isready", "-q", "-d", "${DB_DATABASE}", "-U", "${DB_USERNAME}"]
+
+networks:
+  laravuel-network:
+    driver: bridge
