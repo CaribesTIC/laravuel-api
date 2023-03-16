@@ -9,10 +9,9 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Sanctum\HasApiTokens;
 
-
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
+    use HasApiTokens, HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -32,15 +31,13 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @var array<int, string>
      */
-    protected $hidden = [
+    protected $hidden = [        
         'password',
         'remember_token',
-        'two_factor_recovery_codes',
-        'two_factor_secret',
         'email_verified_at',
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at'        
     ];
 
     /**
@@ -49,8 +46,8 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array<string, string>
      */
     protected $casts = [
-        'is_admin' => 'boolean',
         'email_verified_at' => 'datetime',
+        'is_admin' => 'boolean'
     ];
 
     public function isAdmin(): bool
