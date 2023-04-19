@@ -4,15 +4,38 @@ namespace App\Exceptions;
  
 class ExceptionInstance
 {
-
     /* Exceptions Instance Of Not Validation Exception */
-    public static function ofNotValidation($e)
+    public static function ofNotValidation(object $e): bool
     {
         return !$e instanceof \Illuminate\Validation\ValidationException;
     }
+    
+    /* Exceptions Instance Of Custom Exception */
+    public static function ofCustom(object $e): bool
+    {
+        return $e instanceof \App\Exceptions\CustomException;  
+    }
+
+    /* Exceptions Instance Of Not Custom Exception */
+    public static function ofNotCustom(object $e): \Illuminate\Http\JsonResponse
+    {   // 422 Unprocessable Entity.
+        $resp = ["error" => null, "cod" => null];
+        if ( ExceptionInstance::_of403($e) ) 
+            $resp = [ "error" => "This action is not authorized.", "cod" => 403 ];
+        else if ( ExceptionInstance::_of404($e) )
+            $resp = [ "error" => "Page not found.", "cod" => 404 ];
+        else if ( ExceptionInstance::_of500($e) )
+            $resp = [ "error" => "Internal Server Error.", "cod" => 500 ];
+        else
+            $resp = [
+                "error" => $e->getMessage() ?? "Unknown error: ",
+                "cod" => self::_selectGetCode($e)
+            ];
+        return response()->json($resp, $resp['cod']);
+    }
 
    /* Exceptions Instance Of 403 */
-    public static function of403($e)
+    private static function _of403(object $e): bool
     {
         return (
             $e instanceof \Illuminate\Auth\Access\AuthorizationException ||
@@ -21,7 +44,7 @@ class ExceptionInstance
     }
 
    /* Exceptions Instance Of 404 */
-    public static function of404($e)
+    private static function _of404(object $e): bool
     {
         return (
             $e instanceof \Illuminate\Database\Eloquent\ModelNotFoundException ||
@@ -31,40 +54,18 @@ class ExceptionInstance
     }
 
     /* Exceptions Instance Of 500 */
-    public static function of500($e)
+    private static function _of500(object $e): bool
     {
         return $e instanceof \Illuminate\Database\QueryException;
-    }    
-
-    /* Exceptions Instance Of Not Custom Exception */
-    public static function ofNotCustom($e)
-    {   //dd(get_class($e));
-        // 422 Unprocessable Entity.
-        if ( ExceptionInstance::of403($e) ) 
-            return [ "error" => "This action is not authorized.", "cod" => 403 ];
-        else if ( ExceptionInstance::of404($e) )
-            return [ "error" => "Page not found.", "cod" => 404 ];
-        else if ( ExceptionInstance::of500($e) )
-            return [ "error" => "Internal Server Error.", "cod" => 500 ];
-        else
-            return [
-                "error" => $e->getMessage() ?? "Unknown error: ",
-                "cod" => self::_selectGetCode($e)
-            ];
-    }
-
-    /* Exceptions Instance Of Custom Exception */
-    public static function ofCustom($e)
-    {
-        return $e instanceof \App\Exceptions\CustomException;  
     }
     
-    private static function _selectGetCode($e) {
+    private static function _selectGetCode(object $e): int | evoid
+    {
        if ($e instanceof \Symfony\Component\HttpKernel\Exception\HttpException)
            return $e->getStatusCode();
        else if ($e instanceof \Illuminate\Database\QueryException)
            return $e->getCode();
+       else
+           die("Unknown error code !!");
     }
-
 }
-

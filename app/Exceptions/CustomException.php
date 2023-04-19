@@ -17,7 +17,7 @@ class CustomException extends Exception
     /**
      * Render the exception into an HTTP response.
      */
-    public function render(Request $request) : JsonResponse
+    public function render(Request $request): JsonResponse
     {
         /* $request is in case you need to handle the request */
         return response()->json([

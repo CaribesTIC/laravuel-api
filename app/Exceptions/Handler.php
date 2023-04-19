@@ -53,16 +53,13 @@ class Handler extends ExceptionHandler
         });
     }
 
-    public function render($request, Throwable $e) //dd(get_class($e));
-    {
-        if ( ExceptionInstance::ofNotValidation($e) && env("APP_ENV") === "local" ) {
-            if (ExceptionInstance::ofCustom($e))
-                return $e->render($request);
-            else {
-                $err = ExceptionInstance::ofNotCustom($e);                
-                return response()->json($err, $err['cod']);
-            }
-        }
+    public function render($request, Throwable $e)
+    {   //dd(get_class($e));
+        if ( ExceptionInstance::ofNotValidation($e) && env("APP_ENV") !== "production" ) {
+            return ExceptionInstance::ofCustom($e) 
+                ? $e->render($request)
+                    : ExceptionInstance::ofNotCustom($e);                
+        }        
 
         return parent::render($request, $e);
     }
