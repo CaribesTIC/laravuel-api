@@ -63,21 +63,6 @@ return [
             ]) : [],
         ],
         
-        'mysql_meeting' => [
-            'driver' => 'mysql',
-            'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST_MEETING', '127.0.0.1'),
-            'port' => env('DB_PORT_MEETING', '5432'),
-            'database' => env('DB_DATABASE_MEETING', 'forge'),
-            'username' => env('DB_USERNAME_MEETING', 'forge'),
-            'password' => env('DB_PASSWORD_MEETING', ''),
-            'charset' => 'utf8',
-            'prefix' => '',
-            'prefix_indexes' => true,
-            'search_path' => 'public',
-            'sslmode' => 'prefer',
-        ],
-
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),
@@ -86,6 +71,21 @@ return [
             'database' => env('DB_DATABASE', 'forge'),
             'username' => env('DB_USERNAME', 'forge'),
             'password' => env('DB_PASSWORD', ''),
+            'charset' => 'utf8',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'search_path' => 'public',
+            'sslmode' => 'prefer',
+        ],
+        
+        'pgsql_meeting' => [
+            'driver' => 'pgsql',
+            'url' => env('DATABASE_URL'),
+            'host' => env('DB_HOST_MEETING', '127.0.0.1'),
+            'port' => env('DB_PORT_MEETING', '5432'),
+            'database' => env('DB_DATABASE_MEETING', 'forge'),
+            'username' => env('DB_USERNAME_MEETING', 'forge'),
+            'password' => env('DB_PASSWORD_MEETING', ''),
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
