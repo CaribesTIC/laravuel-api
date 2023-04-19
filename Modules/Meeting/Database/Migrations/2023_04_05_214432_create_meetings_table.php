@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::connection('mysql_meeting')->create('meetings', function (Blueprint $table) {
+        Schema::connection('pgsql_meeting')->create('meetings', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('city_id')->default(1);
             $table->date('app_date')->default(date("Y-m-d"));
@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::connection('mysql_meeting')->dropIfExists('meetings');
+        Schema::connection('pgsql_meeting')->dropIfExists('meetings');
     }
 };
