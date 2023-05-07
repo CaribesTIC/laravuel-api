@@ -1,4 +1,5 @@
 {
     "ShopCart": false,
-    "Meeting": true
+    "Meeting": true,
+    "Client": true
 }

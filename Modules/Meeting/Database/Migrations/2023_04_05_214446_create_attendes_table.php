@@ -12,7 +12,8 @@ return new class extends Migration
      * @return void
      */
     public function up()
-    {        
+    {
+        self::down();
         Schema::connection('pgsql_meeting')->create('attendes', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('meeting_id')->nullable()->unsigned();            

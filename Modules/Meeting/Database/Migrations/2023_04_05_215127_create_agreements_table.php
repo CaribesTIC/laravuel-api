@@ -13,11 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::connection('pgsql_meeting')->create('approaches', function (Blueprint $table) {
+        self::down();
+        Schema::connection('pgsql_meeting')->create('agreements', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('meeting_id')->nullable()->unsigned();
-            $table->string('approach');
-            $table->string('speaker');
+            $table->string('agreement');
+            $table->string('responsible');
             $table->text('observation')->nullable();            
             $table->foreign('meeting_id')->references('id')->on('meetings');
             $table->timestamps();
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::connection('pgsql_meeting')->dropIfExists('approaches');
+        Schema::connection('pgsql_meeting')->dropIfExists('agreements');
     }
 };
