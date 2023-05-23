@@ -9,19 +9,19 @@ trait UserTestable
     
     public static function userAdmin(): User
     {   
-        //self::roleSeeder();
+        self::roleSeeder();
         
         return User::factory()->create([ "role_id" => 1, "is_admin" => true ]); //admin        
     }
     
     public static function userCommon(): User
     {   
-        //self::roleSeeder();
+        self::roleSeeder();
         
         return User::factory()->create([ "role_id" => 2, "is_admin" => false ]); //user       
     }
     
-    /*public static function roleSeeder()
+    public static function roleSeeder()
     {
         Role::create([
             //"id" => 1       
@@ -52,5 +52,5 @@ trait UserTestable
         ]);
         
         return;
-    }*/
+    }
 }
