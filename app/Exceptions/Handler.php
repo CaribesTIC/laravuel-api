@@ -55,7 +55,7 @@ class Handler extends ExceptionHandler
 
     public function render($request, Throwable $e)
     {   //dd(get_class($e));
-        if ( ExceptionInstance::ofNotValidation($e) && env("APP_ENV") !== "production" ) {
+        if ( ExceptionInstance::ofNotValidation($e) && env("APP_ENV") === "production" ) {
             return ExceptionInstance::ofCustom($e) 
                 ? $e->render($request)
                     : ExceptionInstance::ofNotCustom($e);                

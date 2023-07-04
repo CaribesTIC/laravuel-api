@@ -64,7 +64,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::post('/', [RoleController::class, 'store']);        
         Route::put('/{role}', [RoleController::class, 'update']);
         Route::delete('/{id}', [RoleController::class,'destroy']);        
-    });   
+    });
     
 });
 

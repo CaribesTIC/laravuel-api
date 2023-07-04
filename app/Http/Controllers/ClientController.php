@@ -1,21 +1,20 @@
 <?php
 
-namespace Modules\Client\Http\Controllers;
+namespace App\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\{Request, JsonResponse};
-use Illuminate\Routing\Controller;
-use Modules\Client\Http\Resources\ClientResource;
-use Modules\Client\Http\Requests\Client\{
+use Illuminate\Support\Facades\Auth;
+use App\Models\Client;
+use App\Http\Resources\ClientResource;
+use App\Http\Requests\Client\{
     StoreClientRequest,
     UpdateClientRequest
 };
-use Modules\Client\Http\Services\Client\{
+use App\Http\Services\Client\{
     StoreClientService,
     IndexClientService,
     UpdateClientService
 };
-use Modules\Client\Entities\Client;
 
 class ClientController extends Controller
 {

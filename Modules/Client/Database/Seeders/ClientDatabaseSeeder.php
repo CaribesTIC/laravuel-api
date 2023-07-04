@@ -4,6 +4,8 @@ namespace Modules\Client\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Client\Entities\Client;
+
 
 class ClientDatabaseSeeder extends Seeder
 {
@@ -16,7 +18,12 @@ class ClientDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        // $this->call("OthersTableSeeder");
         $this->call([CountrySeederTableSeeder::class]);
+
+        Client::factory(10)->create();
+
+        // $this->call("OthersTableSeeder");
+                // $this->call("OthersTableSeeder");
+
     }
 }
