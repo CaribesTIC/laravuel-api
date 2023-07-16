@@ -28,7 +28,7 @@ class MenuSeeder extends Seeder
             "menu_id" => null,
             "path" => "#",
             "icon" => "",
-            "sort" => 1
+            "sort" => 2
         ]);
         
         Menu::create([ // id 3
@@ -36,7 +36,7 @@ class MenuSeeder extends Seeder
             "menu_id" => 2,
             "path" => "message",
             "icon" => "articles.svg",
-            "sort" => 2
+            "sort" => 1
         ]);
 
         Menu::create([ // id 4
@@ -44,7 +44,7 @@ class MenuSeeder extends Seeder
             "menu_id" => 2,
             "path" => "clients",
             "icon" => "categories.svg",
-            "sort" => 3
+            "sort" => 2
         ]);
 
         Menu::create([ // id 5
@@ -60,7 +60,7 @@ class MenuSeeder extends Seeder
             "menu_id" => null,
             "path" => "#",
             "icon" => "",
-            "sort" => 6
+            "sort" => 3
         ]);
 
         Menu::create([ // id 7
@@ -76,20 +76,28 @@ class MenuSeeder extends Seeder
             "menu_id" => 6,
             "path" => "users",
             "icon" => "user.svg",
-            "sort" => 1
-        ]);        
+            "sort" => 2
+        ]);
 
         Menu::create([ // id 9
+            "title" => "Countries",
+            "menu_id" => 6,
+            "path" => "countries",
+            "icon" => "categories.svg",
+            "sort" => 3
+        ]);       
+
+        Menu::create([ // id 10
             "title" => "Development",
             "menu_id" => null,
             "path" => "#",
             "icon" => "",
-            "sort" => 6
+            "sort" => 4
         ]);
 
-        Menu::create([ // id 10
+        Menu::create([ // id 11
             "title" => "Menus",
-            "menu_id" => 9,
+            "menu_id" => 10,
             "path" => "menus",
             "icon" => "menus.svg",
             "sort" => 1
