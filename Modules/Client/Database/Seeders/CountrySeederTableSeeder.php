@@ -18,10 +18,10 @@ class CountrySeederTableSeeder extends Seeder
         \DB::connection('pgsql_client')->table('countries')->delete();     
         
         \DB::connection('pgsql_client')->unprepared(
-            "INSERT INTO public.countries (id, name, created_at, updated_at) VALUES (1, 'Venezuela', NULL, NULL);
-            INSERT INTO public.countries (id, name, created_at, updated_at) VALUES (2, 'Colombia', NULL, NULL);
-            INSERT INTO public.countries (id, name, created_at, updated_at) VALUES (3, 'Perú', NULL, NULL);
-            INSERT INTO public.countries (id, name, created_at, updated_at) VALUES (4, 'Ecuador', NULL, NULL);"
+            "INSERT INTO public.countries (name, created_at, updated_at) VALUES ('Venezuela', NULL, NULL);
+            INSERT INTO public.countries (name, created_at, updated_at) VALUES ('Colombia', NULL, NULL);
+            INSERT INTO public.countries (name, created_at, updated_at) VALUES ('Perú', NULL, NULL);
+            INSERT INTO public.countries (name, created_at, updated_at) VALUES ('Ecuador', NULL, NULL);"
         );
         
     }
