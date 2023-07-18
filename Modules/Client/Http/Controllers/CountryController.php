@@ -59,4 +59,12 @@ class CountryController extends Controller
         Country::destroy($request->id);
         return response()->json(204);
     }
+
+    /*
+     * Display a listing of the resource to help.
+     */
+    public function help(): JsonResponse
+    {
+        return response()->json(Country::all());
+    }
 }

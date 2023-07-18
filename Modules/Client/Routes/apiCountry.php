@@ -12,4 +12,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::put('/{country}', [CountryController::class, 'update']);
         Route::delete('/{id}', [CountryController::class,'destroy']);
     });
+    Route::get('/countries-help', [CountryController::class, 'help']);
 });
+
