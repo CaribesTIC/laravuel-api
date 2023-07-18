@@ -13,6 +13,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::put('/{client}', [ClientController::class, 'update']);
         Route::delete('/{id}', [ClientController::class,'destroy']);
     });
+    Route::get('/clients-help', [ClientController::class, 'help']);
     Route::prefix('countries')->group(function () {
         Route::get('/', [CountryController::class, 'index']);
         Route::get('/{country}', [CountryController::class, 'show']);
@@ -20,4 +21,5 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::put('/{country}', [CountryController::class, 'update']);
         Route::delete('/{id}', [CountryController::class,'destroy']);
     });
+    Route::get('/countries-help', [CountryController::class, 'help']);
 });
