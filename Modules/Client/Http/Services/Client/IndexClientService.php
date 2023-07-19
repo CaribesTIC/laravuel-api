@@ -35,7 +35,7 @@ class IndexClientService
         }
 
         /* get paginated results */
-        $clients = $query
+        $clients = $query //->with(['country'])
             ->paginate(5)
             ->appends(request()->query());
             
