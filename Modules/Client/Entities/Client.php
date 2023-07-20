@@ -11,7 +11,6 @@ class Client extends Model
     use HasFactory, SoftDeletes;
 
     protected $connection = 'pgsql_client';
-    protected $with = ['country'];
 
     protected $fillable = [
         'id',
@@ -21,16 +20,23 @@ class Client extends Model
         'business_name',
         'phone',
         'country_id',
-        'domicile', 
+        'domicile' 
     ];
 
     protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
 
     protected $casts = [ /* 'field_name' => 'field_type' */ ];
 
+    protected $with = ['country'];
+
     public function country()
     {
         return $this->belongsTo(\Modules\Client\Entities\Country::class);
+    } 
+    
+    protected static function newFactory()
+    {
+        return \Modules\Client\Database\Factories\ClientFactory::new();
     }
 
     /*
@@ -38,15 +44,5 @@ class Client extends Model
         {
             return $this->hasMany(MyChild::class);
         }
-    
-        public function myParent()
-        {
-            return $this->belongsTo(\App\Models\MyParent::class);
-        }
     */
-
-    protected static function newFactory()
-    {
-        return \Modules\Client\Database\Factories\ClientFactory::new();
-    }
 }
