@@ -14,27 +14,23 @@ class Country extends Model
 
     protected $fillable = [
         'id',
-        'name', 
+        'name' 
     ];
 
     protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
 
     protected $casts = [ /* 'field_name' => 'field_type' */ ];
+    
+    
+    protected static function newFactory()
+    {
+        return \Modules\Client\Database\Factories\CountryFactory::new();
+    }
 
     /*
         public function myChild()
         {
             return $this->hasMany(MyChild::class);
         }
-    
-        public function myParent()
-        {
-            return $this->belongsTo(\App\Models\MyParent::class);
-        }
     */
-
-    protected static function newFactory()
-    {
-        return \Modules\Client\Database\Factories\CountryFactory::new();
-    }
 }

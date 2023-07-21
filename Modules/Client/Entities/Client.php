@@ -26,9 +26,9 @@ class Client extends Model
     protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
 
     protected $casts = [ /* 'field_name' => 'field_type' */ ];
-
+    
     protected $with = ['country'];
-
+    
     public function country()
     {
         return $this->belongsTo(\Modules\Client\Entities\Country::class);
