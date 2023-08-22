@@ -21,7 +21,7 @@ class Meeting extends Model
         'entity_id',
         'dependence_id',
         'subject',
-        'reason'
+        'reason',
         'observation' 
     ];
 

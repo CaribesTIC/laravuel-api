@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('subject');
             $table->string('reason');
             $table->text('observation')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
