@@ -31,16 +31,24 @@ class Meeting extends Model
     {
         return $this->belongsTo(\Modules\Meeting\Entities\Country::class);
     } 
+        
+    public function approaches()
+    {        
+        return $this->hasMany(\Modules\Meeting\Entities\Approach::class);
+    }
+    
+    public function attendes()
+    {        
+        return $this->hasMany(\Modules\Meeting\Entities\Attende::class);
+    }
+    
+    public function agreements()
+    {        
+        return $this->hasMany(\Modules\Meeting\Entities\Agreement::class);
+    }
     
     protected static function newFactory()
     {
         return \Modules\Meeting\Database\Factories\MeetingFactory::new();
     }
-
-    /*
-        public function myChild()
-        {
-            return $this->hasMany(MyChild::class);
-        }
-    */
 }
