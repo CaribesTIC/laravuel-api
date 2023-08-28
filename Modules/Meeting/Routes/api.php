@@ -1,7 +1,12 @@
 <?php
 
 use Illuminate\Http\Request;
-use Modules\Meeting\Http\Controllers\MeetingController;
+use Modules\Meeting\Http\Controllers\{
+  CountryController,
+  MeetingController,
+  PersonController
+};
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +24,15 @@ use Modules\Meeting\Http\Controllers\MeetingController;
 //});
 
 Route::middleware(['auth:sanctum'])->group(function () {
+    Route::prefix('countries')->group(function () {
+        Route::get('/', [CountryController::class, 'index']);
+        Route::get('/{country}', [CountryController::class, 'show']);
+        Route::post('/', [CountryController::class, 'store']);
+        Route::put('/{country}', [CountryController::class, 'update']);
+        Route::delete('/{id}', [CountryController::class,'destroy']);
+    });
+    Route::get('/countries-help', [CountryController::class, 'help']);
+
     Route::prefix('meetings')->group(function () {
         Route::get('/', [MeetingController::class, 'index']);
         Route::get('/{meeting}', [MeetingController::class, 'show']);
@@ -27,4 +41,13 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::delete('/{id}', [MeetingController::class,'destroy']);
     });
     Route::get('/meetings-help', [MeetingController::class, 'help']);
+
+    Route::prefix('people')->group(function () {
+        Route::get('/', [PersonController::class, 'index']);
+        Route::get('/{person}', [PersonController::class, 'show']);
+        Route::post('/', [PersonController::class, 'store']);
+        Route::put('/{person}', [PersonController::class, 'update']);
+        Route::delete('/{id}', [PersonController::class,'destroy']);
+    });
+    Route::get('/people-help', [PersonController::class, 'help']);
 });

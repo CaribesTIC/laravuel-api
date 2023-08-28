@@ -6,7 +6,8 @@ use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Meeting\Entities\Person;
 
-class MeetingDatabaseSeeder extends Seeder
+
+class PersonDatabaseSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,11 +17,13 @@ class MeetingDatabaseSeeder extends Seeder
     public function run()
     {
         Model::unguard();
-        
+
         $this->call([CountrySeederTableSeeder::class]);
 
         Person::factory(10)->create();
 
         // $this->call("OthersTableSeeder");
+                // $this->call("OthersTableSeeder");
+
     }
 }
