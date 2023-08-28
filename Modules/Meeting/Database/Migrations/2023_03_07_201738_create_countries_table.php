@@ -30,6 +30,10 @@ return new class extends Migration
      */
     public function down()
     {
+        Schema::connection('pgsql_meeting')->dropIfExists('agreements');
+        Schema::connection('pgsql_meeting')->dropIfExists('attendes');
+        Schema::connection('pgsql_meeting')->dropIfExists('approaches');
+        Schema::connection('pgsql_meeting')->dropIfExists('meetings');
         Schema::connection('pgsql_meeting')->dropIfExists('people');
         Schema::connection('pgsql_meeting')->dropIfExists('countries');
     }

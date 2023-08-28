@@ -15,13 +15,14 @@ return new class extends Migration
     {
         self::down();
         Schema::connection('pgsql_meeting')->create('meetings', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('city_id')->default(1);
-            $table->date('app_date')->default(date("Y-m-d"));
-            $table->time('start_time')->default(date("H:i:s"));            
+            $table->increments('id');            
+            $table->foreignId('country_id')->references("id")->on("countries")->default(1);
+            //$table->integer('city_id')->default(1);
+            //$table->date('app_date')->default(date("Y-m-d"));
+            //$table->time('start_time')->default(date("H:i:s"));            
             $table->string('place');
-            $table->integer('entity_id')->default(1);
-            $table->integer('dependence_id')->default(1);
+            //$table->integer('entity_id')->default(1);
+            //$table->integer('dependence_id')->default(1);
             $table->string('subject');
             $table->string('reason');
             $table->text('observation')->nullable();

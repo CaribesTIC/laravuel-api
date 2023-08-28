@@ -11,12 +11,8 @@ class UpdateMeetingService
     {          
         // $meeting = Meeting::find($request->id);
 
-        $meeting->city_id = $request->city_id;
-        $meeting->app_date = $request->app_date;
-        $meeting->start_time = $request->start_time;
+        $meeting->country_id = $request->country_id;
         $meeting->place = $request->place;
-        $meeting->entity_id = $request->entity_id;
-        $meeting->dependence_id = $request->dependence_id;
         $meeting->subject = $request->subject;
         $meeting->reason = $request->reason;
         $meeting->observation = $request->observation;
