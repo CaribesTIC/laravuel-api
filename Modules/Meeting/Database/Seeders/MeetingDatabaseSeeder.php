@@ -4,7 +4,7 @@ namespace Modules\Meeting\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
-use Modules\Meeting\Entities\Person;
+use Modules\Meeting\Entities\{Person, Meeting};
 
 class MeetingDatabaseSeeder extends Seeder
 {
@@ -20,6 +20,8 @@ class MeetingDatabaseSeeder extends Seeder
         $this->call([CountrySeederTableSeeder::class]);
 
         Person::factory(10)->create();
+        
+        Meeting::factory(10)->create();
 
         // $this->call("OthersTableSeeder");
     }
