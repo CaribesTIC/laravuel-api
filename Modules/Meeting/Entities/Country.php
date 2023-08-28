@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
-class Meeting extends Model
+class Country extends Model
 {
     use HasFactory, SoftDeletes;
 
@@ -14,15 +14,7 @@ class Meeting extends Model
 
     protected $fillable = [
         'id',     
-        'city_id',     
-        'app_date',     
-        'start_time',     
-        'place',     
-        'entity_id',     
-        'dependence_id',     
-        'subject',     
-        'reason',     
-        'observation'     
+        'name'     
     ];
 
     protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
@@ -32,7 +24,7 @@ class Meeting extends Model
     
     protected static function newFactory()
     {
-        return \Modules\Meeting\Database\Factories\MeetingFactory::new();
+        return \Modules\Meeting\Database\Factories\CountryFactory::new();
     }
 
     /*

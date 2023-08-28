@@ -40,9 +40,9 @@ class MenuSeeder extends Seeder
         ]);
 
         Menu::create([ // id 4
-            "title" => "Clients",
+            "title" => "People",
             "menu_id" => 2,
-            "path" => "clients",
+            "path" => "people",
             "icon" => "categories.svg",
             "sort" => 2
         ]);
