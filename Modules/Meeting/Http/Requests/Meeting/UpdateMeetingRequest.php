@@ -20,12 +20,8 @@ class UpdateMeetingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "city_id" => ["required"],
-            "app_date" => ["required"],
-            "start_time" => ["required"],
+            "country_id" => ["required"],
             "place" => ["required"],
-            "entity_id" => ["required"],
-            "dependence_id" => ["required"],
             "subject" => ["required"],
             "reason" => ["required"],
             "observation" => ["required"],

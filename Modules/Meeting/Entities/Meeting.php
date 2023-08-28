@@ -14,12 +14,8 @@ class Meeting extends Model
 
     protected $fillable = [
         'id',     
-        'city_id',     
-        'app_date',     
-        'start_time',     
+        'country_id',     
         'place',     
-        'entity_id',     
-        'dependence_id',     
         'subject',     
         'reason',     
         'observation'     
@@ -29,6 +25,12 @@ class Meeting extends Model
 
     protected $casts = [ /* 'field_name' => 'field_type' */ ];
     
+    protected $with = ['country'];
+    
+    public function country()
+    {
+        return $this->belongsTo(\Modules\Meeting\Entities\Country::class);
+    } 
     
     protected static function newFactory()
     {
