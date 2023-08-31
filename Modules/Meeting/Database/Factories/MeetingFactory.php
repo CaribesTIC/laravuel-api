@@ -30,4 +30,3 @@ class MeetingFactory extends Factory
 
 }
           
-
