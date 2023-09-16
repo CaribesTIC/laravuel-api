@@ -23,7 +23,7 @@ class StoreAgreementRequest extends FormRequest
         return  [
             'meeting_id' => ["required"],           
             'agreement' => ["required"],           
-            'responsible' => ["required"]          
+            'responsible' => ["required"],           
             'observation' => ["required"]           
         ];
     }
