@@ -23,7 +23,7 @@ class StoreApproachRequest extends FormRequest
         return  [
             'meeting_id' => ["required"],           
             'approach' => ["required"],           
-            'speaker' => ["required"]          
+            'speaker' => ["required"],           
             'observation' => ["required"]           
         ];
     }
