@@ -17,18 +17,18 @@ class Agreement extends Model
         'meeting_id',     
         'agreement',     
         'responsible',     
-        'observation',
+        'observation',      
     ];
 
     protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
 
-    protected $casts = [ /* 'field_name' => 'field_type' */ ];    
-
+    protected $casts = [ /* 'field_name' => 'field_type' */ ];
+        
     public function meeting()
     {
         return $this->belongsTo(\Modules\Meeting\Entities\Meeting::class);
-    }
-    
+    }  
+
     protected static function newFactory()
     {
         return \Modules\Meeting\Database\Factories\AgreementFactory::new();

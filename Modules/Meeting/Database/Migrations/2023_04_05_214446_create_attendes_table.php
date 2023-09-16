@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('phone');
             $table->text('observation')->nullable();
             $table->foreign('meeting_id')->references('id')->on('meetings');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

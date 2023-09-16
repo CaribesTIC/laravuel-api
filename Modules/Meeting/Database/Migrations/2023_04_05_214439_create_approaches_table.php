@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('speaker');
             $table->text('observation')->nullable();            
             $table->foreign('meeting_id')->references('id')->on('meetings');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

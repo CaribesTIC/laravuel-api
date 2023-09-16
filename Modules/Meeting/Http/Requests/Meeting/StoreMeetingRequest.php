@@ -20,11 +20,11 @@ class StoreMeetingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "country_id" => ["required"],
-            "place" => ["required"],
-            "subject" => ["required"],
-            "reason" => ["required"],
-            "observation" => ["required"],
+            "country_id" => ["required"],  
+            "place" => ["required"],  
+            "subject" => ["required"],  
+            "reason" => ["required"],  
+            "observation" => ["required"] 
             
         ];
     }
