@@ -18,6 +18,9 @@ class MeetingDatabaseSeeder extends Seeder
         Model::unguard();
         
         $this->call([CountrySeederTableSeeder::class]);
+        $this->call([DependenceSeederTableSeeder::class]);
+        $this->call([EntitySeederTableSeeder::class]);
+        $this->call([PositionSeederTableSeeder::class]);
 
         Person::factory(10)->create();
     
