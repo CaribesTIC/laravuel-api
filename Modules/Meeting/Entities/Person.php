@@ -33,16 +33,9 @@ class Person extends Model
     {
         return $this->belongsTo(\Modules\Meeting\Entities\Country::class);
     } 
-    
+        
     protected static function newFactory()
     {
         return \Modules\Meeting\Database\Factories\PersonFactory::new();
     }
-
-    /*
-        public function myChild()
-        {
-            return $this->hasMany(MyChild::class);
-        }
-    */
 }
