@@ -20,13 +20,13 @@ class StorePersonRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "email" => ["required"],
-            "type" => ["required"],
-            "identification_card" => ["required"],
-            "business_name" => ["required"],
-            "phone" => ["required"],
-            "country_id" => ["required"],
-            "domicile" => ["required"],
+            "email" => ["required"],  
+            "type" => ["required"],  
+            "identification_card" => ["required"],  
+            "business_name" => ["required"],  
+            "phone" => ["required"],  
+            "country_id" => ["required"],  
+            "domicile" => ["required"] 
             
         ];
     }
