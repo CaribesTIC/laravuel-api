@@ -1,10 +1,10 @@
 <?php
 
-namespace Modules\Meeting\Http\Requests\Country;
+namespace Modules\Meeting\Http\Requests\Dependency;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateCountryRequest extends FormRequest
+class UpdateDependencyRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

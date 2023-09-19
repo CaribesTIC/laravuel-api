@@ -17,12 +17,12 @@ class Attende extends Model
         'meeting_id',     
         'idcard',     
         'fullname',     
-        'entity_id',     
-        'dependence_id',     
-        'position_id',     
         'email',     
         'phone',     
-        'observation'     
+        'observation',     
+        'entity_id',     
+        'dependence_id',     
+        'position_id'     
     ];
 
     protected $hidden = ['created_at', 'updated_at', 'deleted_at'];

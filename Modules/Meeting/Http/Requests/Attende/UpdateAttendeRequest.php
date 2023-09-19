@@ -24,12 +24,12 @@ class UpdateAttendeRequest extends FormRequest
             'meeting_id' => ["required"],             
             'idcard' => ["required"],             
             'fullname' => ["required"],             
-            'entity_id' => ["required"],             
-            'dependence_id' => ["required"],             
-            'position_id' => ["required"],             
             'email' => ["required"],             
             'phone' => ["required"],             
-            'observation' => ["required"]             
+            'observation' => ["required"],             
+            'entity_id' => ["required"],             
+            'dependence_id' => ["required"],             
+            'position_id' => ["required"]             
         ];
     }
 }

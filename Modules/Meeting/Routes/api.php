@@ -6,8 +6,11 @@ use Modules\Meeting\Http\Controllers\{
   ApproachController,
   AttendeController,
   CountryController,
+  DependencyController,
+  EntityController,
   MeetingController,
-  PersonController
+  PersonController,
+  PositionController
 };
 
 
@@ -60,6 +63,24 @@ Route::middleware(['auth:sanctum'])->group(function () {
     });
     Route::get('/countries-help', [CountryController::class, 'help']);
 
+    Route::prefix('dependencies')->group(function () {
+        Route::get('/', [DependencyController::class, 'index']);
+        Route::get('/{dependency}', [DependencyController::class, 'show']);
+        Route::post('/', [DependencyController::class, 'store']);
+        Route::put('/{dependency}', [DependencyController::class, 'update']);
+        Route::delete('/{id}', [DependencyController::class,'destroy']);
+    });
+    Route::get('/dependencies-help', [DependencyController::class, 'help']);
+
+    Route::prefix('entities')->group(function () {
+        Route::get('/', [EntityController::class, 'index']);
+        Route::get('/{entity}', [EntityController::class, 'show']);
+        Route::post('/', [EntityController::class, 'store']);
+        Route::put('/{entity}', [EntityController::class, 'update']);
+        Route::delete('/{id}', [EntityController::class,'destroy']);
+    });
+    Route::get('/entities-help', [EntityController::class, 'help']);
+
     Route::prefix('meetings')->group(function () {
         Route::get('/', [MeetingController::class, 'index']);
         Route::get('/{meeting}', [MeetingController::class, 'show']);
@@ -77,4 +98,13 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::delete('/{id}', [PersonController::class,'destroy']);
     });
     Route::get('/people-help', [PersonController::class, 'help']);
+
+    Route::prefix('positions')->group(function () {
+        Route::get('/', [PositionController::class, 'index']);
+        Route::get('/{position}', [PositionController::class, 'show']);
+        Route::post('/', [PositionController::class, 'store']);
+        Route::put('/{position}', [PositionController::class, 'update']);
+        Route::delete('/{id}', [PositionController::class,'destroy']);
+    });
+    Route::get('/positions-help', [PositionController::class, 'help']);
 });

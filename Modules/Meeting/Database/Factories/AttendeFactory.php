@@ -22,9 +22,9 @@ class AttendeFactory extends Factory
         return [     
             'idcard' => $this->faker->text(10),     
             'fullname' => $this->faker->text(10),     
-            //'entity_id' => $this->faker->text(10),
-            //'dependence_id' => $this->faker->text(10),
-            //'position_id' => $this->faker->text(10),
+            'entity_id' => 1,
+            'dependence_id' => 1,
+            'position_id' => 1,
             'email' => $this->faker->text(10),
             'phone' => $this->faker->text(10),
             'observation' => $this->faker->text(10)

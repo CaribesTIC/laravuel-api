@@ -19,12 +19,12 @@ return new class extends Migration
             $table->integer('meeting_id')->nullable()->unsigned();            
             $table->string('idcard');
             $table->string('fullname');
-            $table->integer('entity_id')->default(1);
-            $table->integer('dependence_id')->default(1);
-            $table->integer('position_id')->default(1);
             $table->string('email');
             $table->string('phone');
             $table->text('observation')->nullable();
+            $table->foreignId('entity_id')->references('id')->on('entities');            
+            $table->foreignId('dependence_id')->references('id')->on('dependencies');
+            $table->foreignId('position_id')->references('id')->on('positions');
             $table->foreign('meeting_id')->references('id')->on('meetings');
             $table->softDeletes();
             $table->timestamps();
