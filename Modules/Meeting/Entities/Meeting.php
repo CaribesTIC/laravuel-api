@@ -32,6 +32,11 @@ class Meeting extends Model
         return $this->belongsTo(\Modules\Meeting\Entities\Country::class);
     } 
         
+    public function agreements()
+    {        
+        return $this->hasMany(\Modules\Meeting\Entities\Agreement::class);
+    }
+    
     public function approaches()
     {        
         return $this->hasMany(\Modules\Meeting\Entities\Approach::class);
@@ -40,11 +45,6 @@ class Meeting extends Model
     public function attendes()
     {        
         return $this->hasMany(\Modules\Meeting\Entities\Attende::class);
-    }
-    
-    public function agreements()
-    {        
-        return $this->hasMany(\Modules\Meeting\Entities\Agreement::class);
     }
     
     protected static function newFactory()

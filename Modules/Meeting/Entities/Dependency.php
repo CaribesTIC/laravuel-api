@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
-class Country extends Model
+class Dependency extends Model
 {
     use HasFactory, SoftDeletes;
 
@@ -24,6 +24,6 @@ class Country extends Model
         
     protected static function newFactory()
     {
-        return \Modules\Meeting\Database\Factories\CountryFactory::new();
+        return \Modules\Meeting\Database\Factories\DependencyFactory::new();
     }
 }

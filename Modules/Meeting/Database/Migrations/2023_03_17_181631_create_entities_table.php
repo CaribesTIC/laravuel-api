@@ -36,6 +36,6 @@ return new class extends Migration
         //Schema::connection('pgsql_meeting')->dropIfExists('meetings');
         //Schema::connection('pgsql_meeting')->dropIfExists('people');
         //Schema::connection('pgsql_meeting')->dropIfExists('countries');
-        Schema::dropIfExists('entities');
+        Schema::connection('pgsql_meeting')->dropIfExists('entities');
     }
 };
