@@ -20,10 +20,15 @@ class IndexMeetingService
         $query = Meeting::query();
 
         /* search */
-        $search = $request->input("search");
+        $search = strtolower($request->input("search"));
         if ($search) {
             $query->where(function ($query) use ($search) {
-                $query->where("name", "like", "%$search%");
+                $query
+                ->where(\DB::raw('lower(place)') , "like", "%$search%")                
+                ->orWhere(\DB::raw('lower(subject)') , "like", "%$search%")                
+                ->orWhere(\DB::raw('lower(reason)') , "like", "%$search%")                
+                ->orWhere(\DB::raw('lower(observation)') , "like", "%$search%")                
+                ;
             });
         }
 
