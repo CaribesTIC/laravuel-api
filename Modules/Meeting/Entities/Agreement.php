@@ -17,7 +17,7 @@ class Agreement extends Model
         'meeting_id',     
         'agreement',     
         'responsible',     
-        'observation',      
+        'observation'     
     ];
 
     protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
