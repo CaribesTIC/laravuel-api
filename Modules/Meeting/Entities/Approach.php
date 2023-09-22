@@ -17,7 +17,7 @@ class Approach extends Model
         'meeting_id',     
         'approach',     
         'speaker',     
-        'observation',      
+        'observation'     
     ];
 
     protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
