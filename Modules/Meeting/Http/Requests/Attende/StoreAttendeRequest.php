@@ -28,7 +28,7 @@ class StoreAttendeRequest extends FormRequest
             'phone' => ["required"],           
             'observation' => ["required"],           
             'entity_id' => ["required"],           
-            'dependence_id' => ["required"],           
+            'dependency_id' => ["required"],           
             'position_id' => ["required"]           
         ];
     }

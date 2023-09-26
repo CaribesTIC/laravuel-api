@@ -19,7 +19,7 @@ class StoreAttendeService
         $attende->phone = $request->phone;
         $attende->observation = $request->observation;
         $attende->entity_id = $request->entity_id;
-        $attende->dependence_id = $request->dependence_id;
+        $attende->dependency_id = $request->dependency_id;
         $attende->position_id = $request->position_id;
 
         $attende->save();

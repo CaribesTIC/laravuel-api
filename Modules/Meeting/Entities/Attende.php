@@ -21,18 +21,35 @@ class Attende extends Model
         'phone',     
         'observation',     
         'entity_id',     
-        'dependence_id',     
+        'dependency_id',     
         'position_id'     
     ];
 
     protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
 
     protected $casts = [ /* 'field_name' => 'field_type' */ ];
-        
+    
+    protected $with = ['entity','dependency','position'];
+    
     public function meeting()
     {
         return $this->belongsTo(\Modules\Meeting\Entities\Meeting::class);
-    }  
+    }
+
+    public function entity()
+    {
+        return $this->belongsTo(\Modules\Meeting\Entities\Entity::class);
+    }
+
+    public function dependency()
+    {
+        return $this->belongsTo(\Modules\Meeting\Entities\Dependency::class);
+    }
+
+    public function position()
+    {
+        return $this->belongsTo(\Modules\Meeting\Entities\Position::class);
+    }
 
     protected static function newFactory()
     {
