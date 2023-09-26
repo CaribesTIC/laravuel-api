@@ -37,14 +37,14 @@ class Meeting extends Model
         return $this->hasMany(\Modules\Meeting\Entities\Agreement::class);
     }
     
-    public function approaches()
-    {        
-        return $this->hasMany(\Modules\Meeting\Entities\Approach::class);
-    }
-    
     public function attendes()
     {        
         return $this->hasMany(\Modules\Meeting\Entities\Attende::class);
+    }
+    
+    public function approaches()
+    {        
+        return $this->hasMany(\Modules\Meeting\Entities\Approach::class);
     }
     
     protected static function newFactory()

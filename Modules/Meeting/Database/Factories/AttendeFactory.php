@@ -23,7 +23,7 @@ class AttendeFactory extends Factory
             'idcard' => $this->faker->text(10),     
             'fullname' => $this->faker->text(10),     
             'entity_id' => 1,
-            'dependence_id' => 1,
+            'dependency_id' => 1,
             'position_id' => 1,
             'email' => $this->faker->text(10),
             'phone' => $this->faker->text(10),
