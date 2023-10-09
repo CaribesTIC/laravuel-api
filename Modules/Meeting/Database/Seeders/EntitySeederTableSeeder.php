@@ -18,10 +18,10 @@ class EntitySeederTableSeeder extends Seeder
         \DB::connection('pgsql_meeting')->table('entities')->truncate();     
         
         \DB::connection('pgsql_meeting')->unprepared(
-            "INSERT INTO public.entities (id, name, created_at, updated_at) VALUES (1, 'Company A', NULL, NULL);
-            INSERT INTO public.entities (id, name, created_at, updated_at) VALUES (2, 'Company B', NULL, NULL);
-            INSERT INTO public.entities (id, name, created_at, updated_at) VALUES (3, 'Company C', NULL, NULL);
-            INSERT INTO public.entities (id, name, created_at, updated_at) VALUES (4, 'Company D', NULL, NULL);"
+            "INSERT INTO public.entities (name, created_at, updated_at) VALUES ('Company A', NULL, NULL);
+            INSERT INTO public.entities (name, created_at, updated_at) VALUES ('Company B', NULL, NULL);
+            INSERT INTO public.entities (name, created_at, updated_at) VALUES ('Company C', NULL, NULL);
+            INSERT INTO public.entities (name, created_at, updated_at) VALUES ('Company D', NULL, NULL);"
         );
         
     }
