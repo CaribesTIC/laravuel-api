@@ -18,10 +18,10 @@ class PositionSeederTableSeeder extends Seeder
         \DB::connection('pgsql_meeting')->table('positions')->truncate();     
         
         \DB::connection('pgsql_meeting')->unprepared(
-            "INSERT INTO public.positions (id, name, created_at, updated_at) VALUES (1, 'Boss', NULL, NULL);
-            INSERT INTO public.positions (id, name, created_at, updated_at) VALUES (2, 'Director', NULL, NULL);
-            INSERT INTO public.positions (id, name, created_at, updated_at) VALUES (3, 'Leader', NULL, NULL);
-            INSERT INTO public.positions (id, name, created_at, updated_at) VALUES (4, 'Manager', NULL, NULL);"
+            "INSERT INTO public.positions (name, created_at, updated_at) VALUES ('Boss', NULL, NULL);
+            INSERT INTO public.positions (name, created_at, updated_at) VALUES ('Director', NULL, NULL);
+            INSERT INTO public.positions (name, created_at, updated_at) VALUES ('Leader', NULL, NULL);
+            INSERT INTO public.positions (name, created_at, updated_at) VALUES ('Manager', NULL, NULL);"
         );
         
     }
